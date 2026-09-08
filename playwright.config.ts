@@ -2,19 +2,14 @@ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Environment configuration.
- * Set BASE_URL and ENV in a .env file (see .env.example) or as shell exports.
- * Playwright does not load .env automatically — populate via your shell or
- * a CI secret manager before running tests.
+ * Playwright Test (>=1.45) automatically loads .env and .env.local from the
+ * project root before evaluating this config. No dotenv dependency needed.
+ *
+ * If BASE_URL is still unset after loading, tests will fail at navigation
+ * time with a clear "invalid URL" message — no silent failures.
  */
 const BASE_URL = process.env['BASE_URL'] ?? '';
 const ENV = process.env['ENV'] ?? 'qa';
-
-if (!BASE_URL) {
-  console.warn(
-    '[playwright.config] BASE_URL is not set. ' +
-      'Copy .env.example to .env and populate BASE_URL before running tests.',
-  );
-}
 
 export default defineConfig({
   testDir: './tests',
