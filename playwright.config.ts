@@ -12,6 +12,15 @@ dotenv.config();
 const BASE_URL = process.env['BASE_URL'] ?? '';
 const ENV = process.env['ENV'] ?? 'qa';
 
+/**
+ * SLOWMO: optional millisecond delay injected between every Playwright action.
+ * Use for local visual debugging only — never set in CI.
+ *
+ * Usage:
+ *   SLOWMO=1000 npx playwright test --headed --project=chromium
+ */
+const SLOWMO = process.env['SLOWMO'] ? parseInt(process.env['SLOWMO'], 10) : 0;
+
 export default defineConfig({
   testDir: './tests',
 
@@ -43,6 +52,11 @@ export default defineConfig({
 
   use: {
     baseURL: BASE_URL || undefined,
+
+    /* Slow motion for local headed debugging — 0 in CI and normal runs */
+    launchOptions: {
+      slowMo: SLOWMO,
+    },
 
     /* Collect traces and screenshots for failing tests */
     trace: 'on-first-retry',
