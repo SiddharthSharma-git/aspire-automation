@@ -1,4 +1,5 @@
 import { test, expect } from '../../src/fixtures';
+import { envConfig } from '../../src/config/envConfig';
 
 /**
  * Login test suite — Aspire 2.0
@@ -31,6 +32,9 @@ test.describe('Login', () => {
       // Locator: CSS ID (#email) — explicit id attribute, stable.
       // Note: once LoginPage is built in Phase 4 this moves to a page action.
       await expect(page.locator('#email')).toBeVisible();
+
+      // Enter email from TEST_USERNAME env var — never hardcode credentials.
+      await page.locator('#email').fill(envConfig.testUsername);
     },
   );
 });
