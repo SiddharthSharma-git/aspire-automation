@@ -1,5 +1,4 @@
 import { test, expect } from '../../src/fixtures';
-import { envConfig } from '../../src/config/envConfig';
 
 /**
  * Login test suite — Aspire 2.0
@@ -23,11 +22,15 @@ test.describe('Login', () => {
   test(
     'should load the Aspire application @smoke',
     async ({ page }) => {
-      // Verify the app is reachable and renders a page with an Aspire title.
-      // This confirms baseURL resolves, the network path is open, and the
-      // SPA has bootstrapped enough to set the document title.
-      await expect(page).toHaveURL(envConfig.baseUrl);
+      // Verify the SPA has routed to the login path and rendered the form.
+      // URL: the app redirects from '/' to '/login' client-side after bootstrap.
+      await expect(page).toHaveURL(/\/login$/);
       await expect(page).toHaveTitle(/Aspire/i);
+
+      // Verify the email input is visible.
+      // Locator: CSS ID (#email) — explicit id attribute, stable.
+      // Note: once LoginPage is built in Phase 4 this moves to a page action.
+      await expect(page.locator('#email')).toBeVisible();
     },
   );
 });
