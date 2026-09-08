@@ -1,0 +1,28 @@
+---
+description: Prism-style Aspire automation layers and what belongs in each
+alwaysApply: true
+---
+
+# Aspire architecture
+
+Stack: TypeScript, Playwright Test, Node.js. Do not generate JavaScript test files.
+
+Layers (top to bottom): tests → business flows → pages/components → core → Playwright.
+
+- Tests express business intent only. No locators, no raw click/fill sequences, no env URLs or secrets.
+- Flows own multi-step journeys and take explicit dependencies (pages, API clients).
+- Pages encapsulate locators and page actions. Components own shared UI (header, table, modal, toast, pagination).
+- Core stays thin (`BasePage`, env loader). Do not wrap Playwright without a real gap.
+- Fixtures compose pages/flows and isolate browser context. Config switches environments without changing tests.
+
+Do not create domain Page Objects or tests until the app URL and assignment behavior are known.
+
+Search the repo before adding a page, flow, fixture, or util. Prefer composition over inheritance. Every new abstraction must solve a concrete duplication or isolation problem.
+
+```typescript
+// ✅ tests call flows
+await candidateFlow.createCandidate(candidate);
+
+// ❌ tests drive the DOM
+await page.locator('#email').fill(email);
+```

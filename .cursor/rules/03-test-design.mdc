@@ -1,0 +1,24 @@
+---
+description: Test naming, Arrange-Act-Assert, tags, and coverage intent
+globs: tests/**/*.ts
+alwaysApply: false
+---
+
+# Test design
+
+Name tests as business outcomes: `should prevent candidate creation when mandatory email is missing`. Never `test1`.
+
+Structure: Arrange, Act, Assert. Each test needs a clear objective, preconditions, meaningful assertions, and cleanup only when the test created shared state.
+
+Tag with `@smoke` and `@regression` via Playwright `tag` / title annotations where appropriate.
+
+Cover positive, negative, boundary, validation, authorization/RBAC, errors, state transitions, data integrity, UI, and API/UI integration when relevant.
+
+Tests call flows or page actions — never locators.
+
+```typescript
+test('should prevent candidate creation when mandatory email is missing', async ({ candidateFlow }) => {
+  const result = await candidateFlow.createCandidate({ ...validCandidate, email: '' });
+  await expect(result.validationError).toBeVisible();
+});
+```

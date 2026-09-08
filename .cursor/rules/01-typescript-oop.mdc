@@ -1,0 +1,26 @@
+---
+description: Strict TypeScript and deliberate OOP for the automation framework
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript and OOP
+
+Use strict TypeScript. Prefer `const`, async/await, explicit domain interfaces, and typed parameters.
+
+Avoid `any`, `var`, unnecessary assertions, duplicated types, and magic strings/numbers. If `any` is unavoidable, comment why.
+
+OOP: classes for pages, components, and flows; interfaces for domain models; `BasePage` as an abstract page base; constructor injection for Playwright `Page` and collaborators. Use `protected`/`private` for locators and helpers. Prefer composition unless inheritance expresses a real is-a page relationship.
+
+```typescript
+export abstract class BasePage {
+  constructor(protected readonly page: Page) {}
+}
+
+export class LoginPage extends BasePage {
+  private readonly email = this.page.getByLabel('Email');
+  constructor(page: Page, private readonly header: Header) {
+    super(page);
+  }
+}
+```

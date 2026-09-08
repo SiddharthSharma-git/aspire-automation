@@ -1,0 +1,78 @@
+# Cursor Rules
+
+## Rule 1: Think Before Coding
+Always analyze the requirement before generating code.
+Explain the implementation approach first, identify reusable components, then generate production-ready code.
+
+---
+
+## Rule 2: Follow the Assignment
+Treat this as a professional QA assessment, not a demo project.
+Generate only submission-quality documentation, automation, and project artifacts.
+
+---
+
+## Rule 3: Iterative Development
+Work on only one deliverable at a time.
+Never generate the entire project in one response.
+Complete the current task before moving to the next.
+
+---
+
+## Rule 4: Playwright Standards
+Use Playwright with TypeScript.
+Follow Page Object Model (POM).
+Separate Page Objects, Tests, API, Utilities, Fixtures, Data, and Configuration.
+Never place locators directly inside test files.
+
+---
+
+## Rule 5: Code Quality
+Write clean, readable, maintainable TypeScript.
+Use async/await.
+Avoid duplicate code.
+Use reusable methods.
+Avoid hardcoded values whenever possible.
+
+---
+
+## Rule 6: Test Best Practices
+Every test must have:
+- Clear business objective
+- Preconditions
+- Meaningful assertions
+- Proper cleanup (if required)
+
+Use @Smoke and @Regression tags where appropriate.
+
+---
+
+## Rule 7: Documentation Standards
+Generate professional Markdown documents.
+Use headings, tables, bullet points, and concise explanations.
+Never generate placeholder or filler content.
+
+---
+
+## Rule 8: AI Behaviour
+Never assume functionality that does not exist.
+Base all outputs on:
+- The assignment document
+- The actual application
+- User instructions
+Clearly state assumptions whenever necessary.
+
+---
+
+## Rule 9: Git and Project Structure
+Generate changes suitable for small, logical Git commits.
+Preserve the existing project structure.
+Do not rename folders or files unless explicitly requested.
+
+---
+
+## Rule 10: Explain Decisions
+Whenever generating code, documentation, or test cases:
+- Briefly explain the approach.
+- Mention why it follows QA best practices.
+- Recommend improvements if applicable.

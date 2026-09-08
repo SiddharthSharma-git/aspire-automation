@@ -1,0 +1,24 @@
+---
+description: Playwright Test standards for waits, isolation, reporting, and assertions
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Playwright
+
+Use `@playwright/test`. Rely on auto-waiting and web-first assertions. Tests must be independent and parallel-safe.
+
+Do not use `waitForTimeout()` unless the reason is documented in code as unavoidable.
+
+Assertions belong in tests (or a named validator). Assert business outcomes, not DOM trivia.
+
+Configure (when scaffolding): HTML report, screenshot on failure, trace on failure/retry. Do not add custom logging until it helps debug CI failures.
+
+```typescript
+// ✅
+await expect(candidatePage.successMessage).toBeVisible();
+
+// ❌
+await page.waitForTimeout(5000);
+expect(await page.locator('div:nth-child(4)').count()).toBe(1);
+```
