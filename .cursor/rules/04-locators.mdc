@@ -1,0 +1,23 @@
+---
+description: Locator priority and anti-patterns for pages and components
+globs: "{src/pages,src/components,src/core}/**/*.ts"
+alwaysApply: false
+---
+
+# Locators
+
+Keep locators inside pages and components, never in tests. Prefer semantic locators.
+
+Priority: `getByRole` → `getByLabel` → `getByPlaceholder` → `getByText` → `getByTestId` → stable CSS → XPath only if necessary.
+
+Do not use generated CSS classes, `nth-child` unless unavoidable, positional or deep XPath, or dynamic framework attributes.
+
+Do not store all locators in JSON unless a proven maintenance benefit exists.
+
+```typescript
+// ✅
+this.page.getByRole('button', { name: 'Create candidate' });
+
+// ❌
+this.page.locator('div.sc-a1b2c3 > div:nth-child(4)');
+```

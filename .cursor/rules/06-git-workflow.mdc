@@ -1,0 +1,14 @@
+---
+description: Git branching, commits, and safety for Aspire automation
+alwaysApply: true
+---
+
+# Git workflow
+
+Never commit feature work directly to `main`. Flow: `main` → `develop` → `feature/<name>` → PR → `develop` → `main`.
+
+Inspect `git status` and the current branch before Git changes. Never discard user work, force-push, hard-reset, or delete branches unless the user explicitly asks.
+
+Conventional commits: `feat:`, `fix:`, `refactor:`, `test:`, `chore:`. Keep commits small and logical. Do not commit unless asked.
+
+Do not rename existing folders/files unless requested.

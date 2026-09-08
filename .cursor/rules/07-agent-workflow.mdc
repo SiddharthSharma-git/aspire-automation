@@ -1,0 +1,18 @@
+---
+description: Incremental agent behavior, validation, and conflict handling
+alwaysApply: true
+---
+
+# Agent workflow
+
+Work on one deliverable at a time. Do not scaffold the entire framework in one change.
+
+Before multi-file edits: state the approach, impacted files, and architectural effect. Implement the smallest clean change. Search the repo before creating helpers.
+
+Never assume application features that are not in the assignment, the live app, or user instructions. State assumptions.
+
+Do not hide Playwright failures or use empty `catch`. Preserve error cause and add a useful message.
+
+After meaningful code changes: run typecheck and the smallest relevant Playwright scope. Do not weaken tests to force a pass.
+
+If a user request conflicts with these rules, stop and explain the conflict. Do not silently ignore rules.

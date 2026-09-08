@@ -1,0 +1,19 @@
+---
+description: Typed test data, environment config, and secret handling
+globs: "{src/data,src/config,src/fixtures}/**/*.ts"
+alwaysApply: false
+---
+
+# Test data and config
+
+Separate data from tests. Use typed models and builders. Switch environments via config (`ENV`, `BASE_URL`), not test edits. Support DEV/QA/UAT/STAGING/PROD as optional targets — do not assume all exist.
+
+Never hardcode passwords, tokens, API keys, or environment URLs in source. Never commit `.env`. Use `.env.example` with empty placeholders only. Never log secrets.
+
+```typescript
+export interface Candidate {
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: string;
+}
+```
