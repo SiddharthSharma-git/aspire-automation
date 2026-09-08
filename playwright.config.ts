@@ -1,13 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
 
 /**
- * Environment configuration.
- * Playwright Test (>=1.45) automatically loads .env and .env.local from the
- * project root before evaluating this config. No dotenv dependency needed.
- *
- * If BASE_URL is still unset after loading, tests will fail at navigation
- * time with a clear "invalid URL" message — no silent failures.
+ * Load .env from the project root explicitly.
+ * dotenv.config() is a no-op if the file does not exist, so this is safe
+ * in CI where variables are injected via the environment directly.
+ * This runs before defineConfig() evaluates so BASE_URL is always available.
  */
+dotenv.config();
+
 const BASE_URL = process.env['BASE_URL'] ?? '';
 const ENV = process.env['ENV'] ?? 'qa';
 
