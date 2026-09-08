@@ -1,4 +1,5 @@
 import { test, expect } from '../../src/fixtures';
+import { envConfig } from '../../src/config/envConfig';
 
 /**
  * Login test suite — Aspire 2.0
@@ -25,7 +26,7 @@ test.describe('Login', () => {
       // Verify the app is reachable and renders a page with an Aspire title.
       // This confirms baseURL resolves, the network path is open, and the
       // SPA has bootstrapped enough to set the document title.
-      await expect(page).toHaveURL(/aspire-new\.qa10\.tothenew\.net/);
+      await expect(page).toHaveURL(envConfig.baseUrl);
       await expect(page).toHaveTitle(/Aspire/i);
     },
   );
