@@ -35,6 +35,9 @@ test.describe('Login', () => {
 
       // Enter email from TEST_USERNAME env var — never hardcode credentials.
       await page.locator('#email').fill(envConfig.testUsername);
+
+      // Enter password from TEST_PASSWORD env var — never hardcode credentials.
+      await page.locator('#password').fill(envConfig.testPassword);
     },
   );
 });
