@@ -38,6 +38,10 @@ test.describe('Login', () => {
 
       // Enter password from TEST_PASSWORD env var — never hardcode credentials.
       await page.locator('#password').fill(envConfig.testPassword);
+
+      // Click the LOGIN submit button.
+      // getByRole is preferred over XPath //button[@type='submit'] per 04-locators.mdc.
+      await page.getByRole('button', { name: 'LOGIN' }).click();
     },
   );
 });
