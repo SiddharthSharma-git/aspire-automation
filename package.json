@@ -1,0 +1,22 @@
+{
+  "name": "aspire-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright + TypeScript automation framework for the Aspire Talent Acquisition platform",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:chrome": "playwright test --project=chromium",
+    "test:report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0"
+  }
+}
