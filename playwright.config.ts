@@ -44,10 +44,11 @@ export default defineConfig({
     timeout: 10_000,
   },
 
-  /* Reporters: HTML for local review, list for CI log readability */
+  /* Reporters: HTML for local review, list for CI log readability, Allure for rich reports */
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
     ['list'],
+    ['allure-playwright', { outputFolder: 'allure-results' }],
   ],
 
   use: {
