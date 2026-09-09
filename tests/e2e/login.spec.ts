@@ -32,8 +32,10 @@ test.describe('Login', () => {
       await page.locator('#password').fill(envConfig.testPassword);
 
       // Click the LOGIN submit button.
-      // getByRole preferred over XPath //button[@type='submit'] per 04-locators.mdc.
-      await page.getByRole('button', { name: 'LOGIN' }).click();
+      // Using button[type="submit"] CSS selector (converted from XPath //button[@type='submit']).
+      // Note: getByRole('button', { name: 'LOGIN' }) is architecturally preferred per 04-locators.mdc
+      // but this explicit type selector is used per project requirement.
+      await page.locator('button[type="submit"]').click();
 
       // Verify successful login — page must land on the dashboard.
       await expect(page).toHaveURL(/\/dashboard/);
