@@ -1,6 +1,6 @@
 ---
 description: Locator priority and anti-patterns for pages and components
-globs: "{src/pages,src/components,src/core}/**/*.ts"
+globs: "{UI/pageobjects,src/core}/**/*.ts"
 alwaysApply: false
 ---
 

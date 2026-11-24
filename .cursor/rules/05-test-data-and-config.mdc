@@ -1,6 +1,6 @@
 ---
 description: Typed test data, environment config, and secret handling
-globs: "{src/data,src/config,src/fixtures}/**/*.ts"
+globs: "{src/config,src/fixtures,API/testdata}/**/*.ts"
 alwaysApply: false
 ---
 
