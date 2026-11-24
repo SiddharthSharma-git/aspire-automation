@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "commonjs",
     "moduleResolution": "node",
+    "ignoreDeprecations": "5.0",
     "lib": ["ES2022"],
     "strict": true,
     "esModuleInterop": true,
@@ -12,6 +13,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "tests/**/*", "playwright.config.ts"],
+  "include": ["src/**/*", "UI/**/*", "API/**/*", "tests/**/*", "playwright.config.ts"],
   "exclude": ["node_modules", "dist", "playwright-report", "test-results"]
 }

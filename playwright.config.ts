@@ -1,20 +1,25 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
 
 /**
- * Environment configuration.
- * Set BASE_URL and ENV in a .env file (see .env.example) or as shell exports.
- * Playwright does not load .env automatically — populate via your shell or
- * a CI secret manager before running tests.
+ * Load .env from the project root explicitly.
+ * dotenv.config() is a no-op if the file does not exist, so this is safe
+ * in CI where variables are injected via the environment directly.
+ * This runs before defineConfig() evaluates so BASE_URL is always available.
  */
+dotenv.config();
+
 const BASE_URL = process.env['BASE_URL'] ?? '';
 const ENV = process.env['ENV'] ?? 'qa';
 
-if (!BASE_URL) {
-  console.warn(
-    '[playwright.config] BASE_URL is not set. ' +
-      'Copy .env.example to .env and populate BASE_URL before running tests.',
-  );
-}
+/**
+ * SLOWMO: optional millisecond delay injected between every Playwright action.
+ * Use for local visual debugging only — never set in CI.
+ *
+ * Usage:
+ *   SLOWMO=1000 npx playwright test --headed --project=chromium
+ */
+const SLOWMO = process.env['SLOWMO'] ? parseInt(process.env['SLOWMO'], 10) : 0;
 
 export default defineConfig({
   testDir: './tests',
@@ -39,14 +44,20 @@ export default defineConfig({
     timeout: 10_000,
   },
 
-  /* Reporters: HTML for local review, list for CI log readability */
+  /* Reporters: HTML for local review, list for CI log readability, Allure for rich reports */
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
     ['list'],
+    ['allure-playwright', { outputFolder: 'allure-results' }],
   ],
 
   use: {
     baseURL: BASE_URL || undefined,
+
+    /* Slow motion for local headed debugging — 0 in CI and normal runs */
+    launchOptions: {
+      slowMo: SLOWMO,
+    },
 
     /* Collect traces and screenshots for failing tests */
     trace: 'on-first-retry',
